@@ -17,7 +17,7 @@
 	int flags, int width, int precision, int size)
 
 {
-	int i = BUFF_SIZE - 2;
+	int a = BUFF_SIZE - 2;
 
 	unsigned long int num = va_arg(types, unsigned long int);
 
@@ -25,19 +25,19 @@
 
 	if (num == 0)
 
-		buffer[i--] = '0';
+		buffer[a--] = '0';
 
 	buffer[BUFF_SIZE - 1] = '\0';
 
 	while (num > 0)
 
 	{
-		buffer[i--] = (num % 10) + '0';
+		buffer[a--] = (num % 10) + '0';
 
 		num /= 10;
 	}
 
-	i++;
+	a++;
 
 	return (write_unsgnd(0, i, buffer, flags, width, precision, size));
 
@@ -59,7 +59,7 @@
 	int flags, int width, int precision, int size)
 
 {
-	int i = BUFF_SIZE - 2;
+	int a = BUFF_SIZE - 2;
 
 	unsigned long int num = va_arg(types, unsigned long int);
 
@@ -71,25 +71,25 @@
 
 	if (num == 0)
 
-		buffer[i--] = '0';
+		buffer[a--] = '0';
 
 	buffer[BUFF_SIZE - 1] = '\0';
 
 	while (num > 0)
 
 	{
-		buffer[i--] = (num % 8) + '0';
+		buffer[a--] = (num % 8) + '0';
 
 		num /= 8;
 	}
 
 	if (flags & F_HASH && init_num != 0)
 
-		buffer[i--] = '0';
+		buffer[a--] = '0';
 
-	i++;
+	a++;
 
-	return (write_unsgnd(0, i, buffer, flags, width, precision, size));
+	return (write_unsgnd(0, a, buffer, flags, width, precision, size));
 }
 
 /************** PRINT UNSIGNED NUMBER IN HEXADECIMAL **************/
@@ -156,7 +156,7 @@ int print_hexa_upper(va_list types, char buffer[],
 	int flags, char flag_ch, int width, int precision, int size)
 
 {
-	int i = BUFF_SIZE - 2;
+	int a = BUFF_SIZE - 2;
 
 	unsigned long int num = va_arg(types, unsigned long int);
 
@@ -168,25 +168,25 @@ int print_hexa_upper(va_list types, char buffer[],
 
 	if (num == 0)
 
-		buffer[i--] = '0';
+		buffer[a--] = '0';
 
 	buffer[BUFF_SIZE - 1] = '\0';
 
 	while (num > 0)
 	{
-		buffer[i--] = map_to[num % 16];
+		buffer[a--] = map_to[num % 16];
 		num /= 16;
 	}
 
 	if (flags & F_HASH && init_num != 0)
 
 	{
-		buffer[i--] = flag_ch;
+		buffer[a--] = flag_ch;
 
-		buffer[i--] = '0';
+		buffer[a--] = '0';
 	}
 
-	i++;
+	a++;
 
 	return (write_unsgnd(0, i, buffer, flags, width, precision, size));
 }
